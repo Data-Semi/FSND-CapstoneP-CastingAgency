@@ -1,1 +1,3 @@
-
+ASSISTANT_TOKEN = 'Bearer '
+DIRECTOR_TOKEN = 'Bearer '
+PRODUCER_TOKEN = 'Bearer '
