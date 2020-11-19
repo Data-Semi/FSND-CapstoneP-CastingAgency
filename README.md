@@ -27,3 +27,23 @@ Tests:
 One test for success behavior of each endpoint  
 One test for error behavior of each endpoint  
 At least two tests of RBAC for each role  
+
+
+### Testing
+To run the tests locally, you need to have PostgreSQL installed on your local machines already.
+To set up a test database, replace the following fields on the test_app.py file:
+```db_user =<your username>```
+To run the tests, run:
+dropdb CastingAgencyTest
+createdb CastingAgencyTest 
+
+```source ./setup.sh ```
+
+```python3 test_app.py ```
+
+To monitor the test database contents.
+psql CastingAgencyTest
+select * from "Movie";
+select * from "Actor";
+
+

@@ -18,8 +18,7 @@ class CastingAgencyTest(unittest.TestCase):
         self.app = create_app()
         self.client = self.app.test_client
         self.database_name = "casting_agency_test"
-        self.database_path = "postgresql://{}@{}/{}".format(db_user,
-                                                            'localhost:5432',
+        self.database_path = "postgresql://{}/{}".format('localhost:5432',
                                                             self.database_name)
         self.headers_assistant = {'Content-Type': 'application/json',
                                   'Authorization': assistant_token}
@@ -87,7 +86,7 @@ class CastingAgencyTest(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertTrue(len(data['A new actor added']))
+        self.assertTrue(len(data['new actor added']))
 
     def test_200_post_movies(self):
         res = self.client().post('/movies', headers=self.headers_producer,
@@ -95,7 +94,7 @@ class CastingAgencyTest(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertTrue(len(data['A new movie added']))
+        self.assertTrue(len(data['new movie added']))
 
     def test_422_post_actors_failed(self):
         res = self.client().post('/actors', headers=self.headers_producer,
@@ -114,23 +113,23 @@ class CastingAgencyTest(unittest.TestCase):
         self.assertEqual(data['success'], False)
 
     def test_200_delete_actor(self):
-        res = self.client().delete('/actors/1', headers=self.headers_producer)
+        res = self.client().delete('/actors/6', headers=self.headers_producer)
         data = json.loads(res.data)
 
-        actor = Actor.query.filter(Actor.id == 12).one_or_none()
+        actor = Actor.query.filter(Actor.id == 6).one_or_none()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(data['deleted'], 1)
+        self.assertEqual(data['deleted'], 6)
         self.assertEqual(actor, None)
 
     def test_200_delete_movie(self):
-        res = self.client().delete('/movies/1', headers=self.headers_producer)
+        res = self.client().delete('/movies/6', headers=self.headers_producer)
         data = json.loads(res.data)
 
-        movie = Movie.query.filter(Movie.id == 3).one_or_none()
+        movie = Movie.query.filter(Movie.id == 6).one_or_none()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(data['deleted'], 1)
+        self.assertEqual(data['deleted'], 6)
         self.assertEqual(movie, None)
 
     def test_404_actor_not_found(self):

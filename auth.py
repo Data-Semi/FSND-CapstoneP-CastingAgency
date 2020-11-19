@@ -5,9 +5,9 @@ from jose import jwt
 from urllib.request import urlopen
 
 #Todo: ...
-AUTH0_DOMAIN = '.auth0.com'
+AUTH0_DOMAIN = 'fsnd-casting-agency-project.us.auth0.com'
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'CastingAgency'
+API_AUDIENCE = 'http://localhost:5000'
 
 ## AuthError Exception
 
