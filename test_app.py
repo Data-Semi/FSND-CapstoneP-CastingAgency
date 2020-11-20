@@ -12,7 +12,6 @@ director_token = os.environ.get('DIRECTOR_TOKEN')
 producer_token = os.environ.get('PRODUCER_TOKEN')
 db_user = "postgres"
 
-
 class CastingAgencyTest(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
@@ -33,38 +32,20 @@ class CastingAgencyTest(unittest.TestCase):
             self.db.init_app(self.app)
             self.db.create_all()
         self.new_actor = {
-                        "name": "apple",
-                        "age": 6,
-                        "gender": "Male"
+                        "name": "Brad Pitt",
+                        "age": 57,
+                        "gender": "male",
                         }
         self.new_movie = {
-                        "title": "Good Morning",
-                        "release_date": "11/19/2020"
+                        "title": "The Curious Case of Benjamin Button",
+                        "release_date": "2008-12-25T00:00:00.000Z",
                         }
 
     def tearDown(self):
         """Executed after reach test"""
         pass
 
-    def test_404_actors_not_found_get_actors(self):
-        Actor.query.delete()
-        res = self.client().get('/actors', headers=self.headers_producer)
-        data = json.loads(res.data)
-        self.assertEqual(res.status_code, 404)
-        self.assertEqual(data['success'], False)
-        self.assertEqual(data['message'], "Not Found")
-
-    def test_404_movies_not_found_get_movies(self):
-        Movie.query.delete()
-        res = self.client().get('/movies', headers=self.headers_producer)
-        data = json.loads(res.data)
-        self.assertEqual(res.status_code, 404)
-        self.assertEqual(data['success'], False)
-        self.assertEqual(data['message'], "Not Found")
-
     def test_200_get_actors(self):
-        self.client().post('/actors', headers=self.headers_producer,
-                           json=self.new_actor)
         res = self.client().get('/actors', headers=self.headers_producer)
         self.assertEqual(res.status_code, 200)
         data = json.loads(res.data)
@@ -72,29 +53,11 @@ class CastingAgencyTest(unittest.TestCase):
         self.assertTrue(data['actors'])
 
     def test_200_get_movies(self):
-        self.client().post('/movies', headers=self.headers_producer,
-                           json=self.new_movie)
         res = self.client().get('/movies', headers=self.headers_producer)
         self.assertEqual(res.status_code, 200)
         data = json.loads(res.data)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['movies'])
-
-    def test_200_post_actors(self):
-        res = self.client().post('/actors', headers=self.headers_producer,
-                                 json=self.new_actor)
-        data = json.loads(res.data)
-        self.assertEqual(res.status_code, 200)
-        self.assertEqual(data['success'], True)
-        self.assertTrue(len(data['new actor added']))
-
-    def test_200_post_movies(self):
-        res = self.client().post('/movies', headers=self.headers_producer,
-                                 json=self.new_movie)
-        data = json.loads(res.data)
-        self.assertEqual(res.status_code, 200)
-        self.assertEqual(data['success'], True)
-        self.assertTrue(len(data['new movie added']))
 
     def test_422_post_actors_failed(self):
         res = self.client().post('/actors', headers=self.headers_producer,
@@ -112,35 +75,49 @@ class CastingAgencyTest(unittest.TestCase):
         self.assertEqual(data['message'], "Unprocessable")
         self.assertEqual(data['success'], False)
 
-    def test_200_delete_actor(self):
-        res = self.client().delete('/actors/6', headers=self.headers_producer)
+    def test_200_post_actors(self):
+        res = self.client().post('/actors', headers=self.headers_producer,
+                                 json=self.new_actor)
         data = json.loads(res.data)
-
-        actor = Actor.query.filter(Actor.id == 6).one_or_none()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(data['deleted'], 6)
+        self.assertTrue(len(data['new actor added']))
+
+    def test_200_post_movies(self):
+        res = self.client().post('/movies', headers=self.headers_producer,
+                                 json=self.new_movie)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(len(data['new movie added']))
+
+    def test_200_delete_actor(self):
+        res = self.client().delete('/actors/5', headers=self.headers_producer)
+        data = json.loads(res.data)
+        actor = Actor.query.filter(Actor.id == 5).one_or_none()
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(data['deleted'], 5)
         self.assertEqual(actor, None)
 
     def test_200_delete_movie(self):
-        res = self.client().delete('/movies/6', headers=self.headers_producer)
+        res = self.client().delete('/movies/5', headers=self.headers_producer)
         data = json.loads(res.data)
-
-        movie = Movie.query.filter(Movie.id == 6).one_or_none()
+        movie = Movie.query.filter(Movie.id == 5).one_or_none()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(data['deleted'], 6)
+        self.assertEqual(data['deleted'], 5)
         self.assertEqual(movie, None)
 
     def test_404_actor_not_found(self):
-        res = self.client().delete('/actors/3', headers=self.headers_producer)
+        res = self.client().delete('/actors/100', headers=self.headers_producer)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['message'], "Not Found")
         self.assertEqual(data["success"], False)
 
     def test_404_movie_not_found(self):
-        res = self.client().delete('/movies/3', headers=self.headers_producer)
+        res = self.client().delete('/movies/100', headers=self.headers_producer)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['message'], "Not Found")
@@ -184,11 +161,43 @@ class CastingAgencyTest(unittest.TestCase):
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], "Not Found")
 
+    def test_404_actors_not_found_get_actors(self):
+        Actor.query.delete()
+        res = self.client().get('/actors', headers=self.headers_producer)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], "Not Found")
+
+    def test_404_movies_not_found_get_movies(self):
+        Movie.query.delete()
+        res = self.client().get('/movies', headers=self.headers_producer)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], "Not Found")
+
+    def test_403_delete_movie_not_permitted(self):
+        res = self.client().delete('/movies/4',
+                                   headers=self.headers_director)
+        data = json.loads(res.data)
+        # movie = Movie.query.filter(Movie.id == 4).one_or_none()
+        self.assertEqual(res.status_code, 403)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], "Permission not found")
+
+    def test_403_post_movie_not_permitted(self):
+        res = self.client().post('/movies', headers=self.headers_director,
+                                 json=self.new_movie)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 403)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], "Permission not found")
+
     def test_403_patch_actor_not_permitted(self):
         res = self.client().delete('/actors/4',
                                    headers=self.headers_assistant)
         data = json.loads(res.data)
-
         actor = Actor.query.filter(Actor.id == 4).one_or_none()
         self.assertEqual(res.status_code, 403)
         self.assertEqual(data['success'], False)
@@ -201,7 +210,7 @@ class CastingAgencyTest(unittest.TestCase):
         self.assertEqual(res.status_code, 403)
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], "Permission not found")
-#Todo: Add delete permission test ...
+        
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()
