@@ -46,4 +46,16 @@ psql CastingAgencyTest
 select * from "Movie";
 select * from "Actor";
 
+https://casting-agency-program.herokuapp.com/
+
+
+
+flask db migrate , have to change codes inside models.py. But if use manage.py. it is independent.
+
+python manage.py db init
+python manage.py db migrate
+python manage.py db upgrade
+
+heroku3 instead of heroku
+
 
