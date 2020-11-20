@@ -9,7 +9,6 @@ Flask-Migrate==2.5.3
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.4.1
 gunicorn==20.0.4
-heroku==0.1.4
 heroku3==4.2.3
 idna==2.10
 itsdangerous==1.1.0
