@@ -5,7 +5,6 @@ from flask import (Flask, render_template, request,
 from flask_migrate import Migrate
 
 database_name = "casting_agency"
-#Todo: Heroku...
 database_path = "postgres://{}/{}".format('localhost:5432', database_name)
 db = SQLAlchemy()
 
