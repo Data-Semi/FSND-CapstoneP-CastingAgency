@@ -2,6 +2,9 @@
 
 pg_dump -U postgres casting_agency >casting_db_init_data.psql
 
+2. git push heroku HEAD:master
+
+Need to use above command instead of ```git push heroku master```
 -----------------------------------------------------------------
 2. To get tokens:
 
