@@ -37,11 +37,13 @@ To run the tests locally, you need to have PostgreSQL installed on your local ma
 To set up a test database, replace the following fields on the test_app.py file:  
 ```db_user =<your username>```  
 To run the tests, run:   
+```python test_app.py ```  
+Alternertively, to prepare the test, run:  
 ```dropdb CastingAgencyTest```  
 ```createdb CastingAgencyTest```   
-```psql -U postgres casting_agency_test < casting_db_init_data.psql```  
+```psql -U postgres casting_agency_test < ./debug_resources/casting_db_init_data.psql```  
 ```source ./setup.sh ```  
-```python test_app.py ```  
+
 
 To monitor the changes of test database contents, run:  
 ```psql CastingAgencyTest```  
@@ -82,7 +84,7 @@ If authentication is required, these error types will be returned when requests 
 There are 3 roles:  
 - Casting Assistant: Can view actors and movies  
 - Casting Director: Can view actors and movies, add or delete an actor from the database, and modify actors or movies  
-- Producer: Have all permissions. Which means all permissions a Casting Director has and add or delete a movie from the database   
+- Producer: Have all permissions a Casting Director has and add or delete a movie from the database   
 
 ### Endpoints  
 #### GET /actors (Casting Assistant, Casting Director, Producer)  
@@ -189,7 +191,7 @@ There are 3 roles:
 ## Authors  
 WH Liang  
 ## Acknowledgements  
-I would like to thank Udacity mentors help me to solve many learning blockers-system errors and debugging issues.  
+I would like to thank Udacity mentors help me to solve many learning blockers: system errors and debugging issues.  
 
 ### Notes:  
 To avoid the error from version confliction with heroku and dateutil, I installed heroku3 instead of heroku.  
