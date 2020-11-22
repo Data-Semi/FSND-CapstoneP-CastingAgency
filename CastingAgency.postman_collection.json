@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "c05f8b77-7b21-43bc-a025-2f64251540e2",
+		"name": "CastingAgency",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Producer",
+			"item": [
+				{
+					"name": "actors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlByVHFnY1E3ZlZoeVhUYWlBM0JPWSJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtY2FzdGluZy1hZ2VuY3ktcHJvamVjdC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZiNjAyYWU2MWY5ZTcwMDc2N2IyYmUwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiaWF0IjoxNjA2MDc4NDMzLCJleHAiOjE2MDYxNjQ4MzMsImF6cCI6IlQ2ZXRnNEhueGVKN2R2b2pKa1FHNm41Mm8zV1B5VVY2Iiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.aHy90i9w5cNyV6bxhFo4ZUELsH9nnWVAXiH682BpXzoPvPFkFJVOUL_h2GDiG2Lgiu5yn67Z15GcjEgQwfBP__IfrTJM2YMsrcp2LzpbhIYM_kxqDw_PGMio_Wb7gWROx069iG17DidkH_HW7jUvd-cXpGZDCKMnVjG1Lc36wW0BNuiScqeJmgUFuB_4qhyOS0FZcNYBAUk69x7V7_8L1g8DbgqEGrVmdlun-e5HeXuxQPW9STgKGsi_lhHl062ThKA827FtEvXeqT_RYVN9_dXaPqqXTF9SlPJb4zLsL5njhs0ZoMFy33ZZman_KAZoZ8DjZfKcuqnsqI52nia__Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 3,\r\n        \"name\":\"Song Hye-kyo\",\r\n        \"age\":39,\r\n        \"gender\":\"female\"      \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-app-fsnd.herokuapp.com/actors",
+							"protocol": "https",
+							"host": [
+								"casting-agency-app-fsnd",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-app-fsnd.herokuapp.com/actors",
+							"protocol": "https",
+							"host": [
+								"casting-agency-app-fsnd",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post-movies",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"title\":\"Hwang Jin Yi\",\r\n    \"release_date\":\"2007-07-06T00:00:00.000Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-app-fsnd.herokuapp.com/movies",
+							"protocol": "https",
+							"host": [
+								"casting-agency-app-fsnd",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "movies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-app-fsnd.herokuapp.com/movies",
+							"protocol": "https",
+							"host": [
+								"casting-agency-app-fsnd",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actors/2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-app-fsnd.herokuapp.com/actors/2",
+							"protocol": "https",
+							"host": [
+								"casting-agency-app-fsnd",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "movies/2",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://casting-agency-app-fsnd.herokuapp.com/movies/2",
+							"protocol": "https",
+							"host": [
+								"casting-agency-app-fsnd",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actors/3",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"WHL\",\"age\": \"88\",\"gender\": \"Female\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-app-fsnd.herokuapp.com/actors/3",
+							"protocol": "https",
+							"host": [
+								"casting-agency-app-fsnd",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"actors",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "movies/3",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\": \"Apple Dream\", \"release_date\": \"2020-11-22\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://casting-agency-app-fsnd.herokuapp.com/movies/3",
+							"protocol": "https",
+							"host": [
+								"casting-agency-app-fsnd",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"movies",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlByVHFnY1E3ZlZoeVhUYWlBM0JPWSJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtY2FzdGluZy1hZ2VuY3ktcHJvamVjdC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWZiNjAyYWU2MWY5ZTcwMDc2N2IyYmUwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiaWF0IjoxNjA2MDc4NDMzLCJleHAiOjE2MDYxNjQ4MzMsImF6cCI6IlQ2ZXRnNEhueGVKN2R2b2pKa1FHNm41Mm8zV1B5VVY2Iiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.aHy90i9w5cNyV6bxhFo4ZUELsH9nnWVAXiH682BpXzoPvPFkFJVOUL_h2GDiG2Lgiu5yn67Z15GcjEgQwfBP__IfrTJM2YMsrcp2LzpbhIYM_kxqDw_PGMio_Wb7gWROx069iG17DidkH_HW7jUvd-cXpGZDCKMnVjG1Lc36wW0BNuiScqeJmgUFuB_4qhyOS0FZcNYBAUk69x7V7_8L1g8DbgqEGrVmdlun-e5HeXuxQPW9STgKGsi_lhHl062ThKA827FtEvXeqT_RYVN9_dXaPqqXTF9SlPJb4zLsL5njhs0ZoMFy33ZZman_KAZoZ8DjZfKcuqnsqI52nia__Q",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "32cdf582-f368-42c7-93f0-086d0257a89f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8d7e54c1-78b2-4feb-ac31-ca6ef02f9350",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -90,19 +90,19 @@ There are 3 roles:
 - Sample:
 ```
 {
-  "actors": [
-    {
-      "age": 33,
-      "gender": "Female",
-      "name": "Angelina Jolie"
-    },
-    {
-      "age": 23,
-      "gender": "Female",
-      "name": "Natalie Brown"
-    }
-  ],
-  "success": true
+    "actors": [
+        {
+            "age": 57,
+            "gender": "male",
+            "name": "Brad Pitt"
+        },
+        {
+            "age": 57,
+            "gender": "male",
+            "name": "Brad Pitt"
+        }
+    ],
+    "success": true
 }
 ```
 #### GET /movies (Casting Assistant, Casting Director, Producer)
@@ -110,44 +110,44 @@ There are 3 roles:
 - Sample:
 ```
 {
-  "movies": [
-    {
-      "release date": "2019-07-07",
-      "title": "Ava"
-    },
-    {
-      "release date": "2010-12-10",
-      "title": "Boba"
-    }
-  ],
-  "success": true
+    "movies": [
+        {
+            "release date": "2016-09-07",
+            "title": "The Age of Shadows"
+        },
+        {
+            "release date": "2007-07-06",
+            "title": "Hwang Jin Yi"
+        }
+    ],
+    "success": true
 }
 ```
 
 #### POST /actors (Casting Director, Producer)
 - General: Creates a new actor using JSON request parameters and returns success value, newly created actor
-- Sample: Response for a request with following body {"name": "Brad P", "age": 45, "gender": "Male"} and the appropriate header: 
+- Sample: Response for a request with following body and the appropriate header:
 
 ```
 {
-  "new actor added": {
-    "age": 45,
-    "gender": "Male",
-    "name": "Brad P"
-  },
-  "success": true
+    "new actor added": {
+        "age": 57,
+        "gender": "male",
+        "name": "Brad Pitt"
+    },
+    "success": true
 }
 ```
 #### POST /movies (Producer)
 - General: Creates a new movie using JSON request parameters and returns success value, newly created movie
-- Sample: Response for a request with following body {"title": "Avatar", "release_date": "2020-01-03"} and the appropriate header:
+- Sample: Response for a request with following body and the appropriate header:
 ```
 {
-  "new movie added": {
-    "release_date": "2020-01-03",
-    "title": "Avatar"
-  },
-  "success": true
+    "new movie added": {
+        "release_date": "2016-09-07",
+        "title": "The Age of Shadows"
+    },
+    "success": true
 }
 ```
 #### DELETE /actors/<<int:id>> (Casting Director, Producer)

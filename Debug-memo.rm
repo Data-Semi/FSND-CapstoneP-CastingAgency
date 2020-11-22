@@ -1,28 +1,9 @@
 1. pg_dump  
-https://www.a2hosting.com/kb/developer-corner/postgresql/import-and-export-a-postgresql-database
-
-import databse before test...
-
-or... copy SQALchemy object in the test_flaskr.py file
 
 pg_dump -U postgres casting_agency >casting_db_init_data.psql
 
-dropdb casting_agency_test
-createdb casting_agency_test
-psql -U postgres casting_agency_test < casting_db_init_data.psql
-
-DB migrations in models.py method setup_db()
-
-Memo for getting Tokens: 
-Auto0_memo.md
-
-2. Heroku
-
-3. Readme
-
-
 -----------------------------------------------------------------
-To get tokens:
+2. To get tokens:
 
 https://fsnd-casting-agency-project.us.auth0.com/authorize?audience=http://localhost:5000&response_type=token&client_id=T6etg4HnxeJ7dvojJkQG6n52o3WPyUV6&redirect_uri=https://127.0.0.1:5000/
 
