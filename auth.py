@@ -4,20 +4,19 @@ from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 
-#Todo: ...
 AUTH0_DOMAIN = 'fsnd-casting-agency-project.us.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'http://localhost:5000'
 
-## AuthError Exception
 
+# AuthError Exception
 class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
 
 
-## Auth Header
+# Auth Header
 
 def get_token_auth_header():
     auth = request.headers.get('Authorization', None)
@@ -94,9 +93,9 @@ def verify_decode_jwt(token):
             payload = jwt.decode(
                 token,
                 rsa_key,
-                algorithms = ALGORITHMS,
-                audience = API_AUDIENCE,
-                issuer = 'https://' + AUTH0_DOMAIN + '/'
+                algorithms=ALGORITHMS,
+                audience=API_AUDIENCE,
+                issuer='https://' + AUTH0_DOMAIN + '/'
             )
             return payload
 
@@ -109,7 +108,7 @@ def verify_decode_jwt(token):
         except jwt.JWTClaimsError:
             raise AuthError({
                 'code': 'invalid_claims',
-                'description': 'Incorrect claims. Please, check the audience and issuer.'
+                'description': 'Incorrect claims. Check the audience, issuer.'
             }, 401)
         except Exception:
             raise AuthError({

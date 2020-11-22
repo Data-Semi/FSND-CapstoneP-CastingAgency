@@ -12,13 +12,14 @@ director_token = os.environ.get('DIRECTOR_TOKEN')
 producer_token = os.environ.get('PRODUCER_TOKEN')
 db_user = "postgres"
 
+
 class CastingAgencyTest(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
         self.client = self.app.test_client
         self.database_name = "casting_agency_test"
         self.database_path = "postgresql://{}/{}".format('localhost:5432',
-                                                            self.database_name)
+                                                         self.database_name)
         self.headers_assistant = {'Content-Type': 'application/json',
                                   'Authorization': assistant_token}
         self.headers_director = {'Content-Type': 'application/json',
@@ -110,14 +111,14 @@ class CastingAgencyTest(unittest.TestCase):
         self.assertEqual(movie, None)
 
     def test_404_actor_not_found(self):
-        res = self.client().delete('/actors/100', headers=self.headers_producer)
+        res = self.client().delete('/actors/99', headers=self.headers_producer)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['message'], "Not Found")
         self.assertEqual(data["success"], False)
 
     def test_404_movie_not_found(self):
-        res = self.client().delete('/movies/100', headers=self.headers_producer)
+        res = self.client().delete('/movies/99', headers=self.headers_producer)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['message'], "Not Found")
@@ -210,7 +211,7 @@ class CastingAgencyTest(unittest.TestCase):
         self.assertEqual(res.status_code, 403)
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], "Permission not found")
-        
+
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()

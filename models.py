@@ -1,4 +1,3 @@
-
 from flask_sqlalchemy import SQLAlchemy
 from flask import (Flask, render_template, request,
                    Response, redirect, url_for, jsonify, abort)
@@ -16,8 +15,9 @@ def setup_db(app, database_path=database_path):
     db.app = app
     db.init_app(app)
     db.create_all()
-    # migrate = Migrate(app, db) , if use this line, 
+    # migrate = Migrate(app, db) , if use this line,
     # delete line db.create_all() avobe.
+
 
 class Movie(db.Model):
     __tablename__ = 'Movie'
