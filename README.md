@@ -40,6 +40,7 @@ To set up a test database, replace the following fields on the test_app.py file:
 To run the tests, run: 
 ```dropdb CastingAgencyTest```
 ```createdb CastingAgencyTest``` 
+```psql -U postgres casting_agency_test < casting_db_init_data.psql```
 ```source ./setup.sh ```
 ```python test_app.py ```
 
@@ -170,7 +171,7 @@ There are 3 roles:
 ```
 #### PATCH /actors/<<int:id>> (Casting Director, Producer)
 - General: Modifies an actor by id using JSON request parameters and returns success value and id of the modified actor
-- Sample: Response for a request to modify an actor with id=3, with the following body {"name": "Tien Le","age": "22","gender": "Female"} and the appropriate header:
+- Sample: Response for a request to modify an actor with id=3, with the following body {"name": "WHL","age": "88","gender": "Female"} and the appropriate header:
 ```
 {
   "success": true,
@@ -179,7 +180,7 @@ There are 3 roles:
 ```
 #### PATCH /movies/<<int:id>> (Casting Director, Producer)
 - General: Modifies a movie by id using JSON request parameters; returns success value and id of the modified movie
-- Sample: Response for a request to modify a movie with id=3, with the following body{"title": "Mat Biec", "release_date": "2020-01-02"} and the appropriate header:
+- Sample: Response for a request to modify a movie with id=3, with the following body{"title": "Apple Dream", "release_date": "2020-11-22"} and the appropriate header:
 ```
 {
   "success": true,
@@ -187,45 +188,12 @@ There are 3 roles:
 }
 ```
 ## Authors
-Tien Le
+WH Liang
 ## Acknowledgements
-I would like to thank Udacity for the idea suggestion of this project
-
-
-
-
-
-
-
-Models:  
-
-Movies with attributes title and release date    
-Actors with attributes name, age and gender  
-Endpoints:  
-GET /actors and /movies   
-DELETE /actors/ and /movies/  
-POST /actors and /movies and  
-PATCH /actors/ and /movies/  
-Roles:  
-Casting Assistant  
-Can view actors and movies  
-Casting Director  
-All permissions a Casting Assistant has and…  
-Add or delete an actor from the database  
-Modify actors or movies  
-Executive Producer  
- 
-Tests:  
-One test for success behavior of each endpoint  
-One test for error behavior of each endpoint  
-At least two tests of RBAC for each role  
-
-
-### Testing
-
-flask db migrate , have to change codes inside models.py. But if use 
+I would like to thank Udacity mentors help me to solve many learning blockers-system errors and debugging issues.
 
 ### Notes:
 To avoid the error from version confliction with heroku and dateutil, I installed heroku3 instead of heroku.
+For prepare further debug, I add postman collection and Debug-memo.rm and migrations folder
 
 
