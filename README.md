@@ -8,24 +8,26 @@ I could apply all skills that I have learned in the Udacity's Full Stack web dev
 This project is coded in Python3 and is styled to PEP 8 Style Guide.  
 
 ## Casting Agency Specifications  
-The Casting Agency models could be used by user that is responsible for creating movies and managing and assigning actors to those movies.   
+The Casting Agency models could be used for creating movies and managing and assigning actors to those movies.   
 
 ## Getting Started
 ### Pre-requisites and Local Development
-You should already have Python3, pip and node installed on your local machines
-To create a virtual environment on MacOS, run:
-```python3 -m venv env```
+You should already have Python3, pip on your local machines
+To create a virtual environment on Windows, run:
+```python -m venv venv```
 To activate the virtual environment, run:
-```source env/bin/activate```
+```source venv/Scripts/activate```
 ## About the Stack
 ### Backend
-On MacOS, to set up all the dependencies, run:
+To set up all the dependencies, run:
 ```pip install requirements.txt```
 To run the application on your local machine, run:
-```python3 app.py```
-The application is hosted on https://sheltered-bayou-87289.herokuapp.com/ and can also be run locally at http://127.0.0.1:5000/ .
+```FLASK_APP=app.py```  
+```FLASK_ENV=development```  
+```flask run```  
 The PostgreSQL database is hosted on Heroku. If you want to run locally using your local databse, you can modify the following fields in the models.py file:
-```database_name =<your_database_name>, database_path = <your_database_path```
+```database_name =<your_database_name>, database_path = <your_database_path>```
+For example: database_path = "postgres://{}/{}".format('localhost:5432', database_name)
 
 ### Frontend
 Work in Progress
@@ -36,10 +38,24 @@ To run the tests locally, you need to have PostgreSQL installed on your local ma
 To set up a test database, replace the following fields on the test_app.py file:
 ```db_user =<your username>```
 To run the tests, run: 
-```python3 test_app.py ```
+```dropdb CastingAgencyTest```
+```createdb CastingAgencyTest``` 
+```source ./setup.sh ```
+```python test_app.py ```
+
+To monitor the changes of test database contents, run:
+```psql CastingAgencyTest```
+```select * from "Movie";```
+```select * from "Actor";```
+
+For DB migration, I decided to use manage.py file. This will avoid modify models.py file for delete db.create_all() line. All commends I need to use are:
+```python manage.py db init```
+```python manage.py db migrate```
+```python manage.py db upgrade```
+
 ## API Reference
 ### Getting Started
-- Base URL: This app is hosted on: https://sheltered-bayou-87289.herokuapp.com/, or it can be run locally on http://127.0.0.1:5000/
+- Base URL: The application is hosted on https://casting-agency-app-fsnd.herokuapp.com/ and can also be run locally at http://127.0.0.1:5000/ .
 - Authentication: This version of the application requires authentication for all endpoints
 
 ### Error Handling
@@ -47,8 +63,8 @@ Errors are returned as JSON objects in the following format:
 ```
 {
   "success": False,
-   "error": 400,
-   "message": "Bad Request"
+   "error": 403,
+   "message": "Permission not found"
 }
 ```
 The API will return these error types when requests fail:
@@ -59,14 +75,14 @@ The API will return these error types when requests fail:
 - 500: Internal Server Error
 
 If authentication is required, these error types will be returned when requests fail:
-- 401 : Errors regarding authorization headers or token (i.e: "Token expired")
+- 401: Errors regarding authorization headers or token (i.e: "Token expired")
 - 403: Permission not found
-- 400: Invalid header
+- 400: Invalid header (i.e: "Permission not included in JWT.")
 ### Roles and Permissions
 There are 3 roles:
 - Casting Assistant: Can view actors and movies
 - Casting Director: Can view actors and movies, add or delete an actor from the database, and modify actors or movies
-- Producer: Have all permissions
+- Producer: Have all permissions. Which means all permissions a Casting Director has and add or delete a movie from the database 
 
 ### Endpoints
 #### GET /actors (Casting Assistant, Casting Director, Producer)
@@ -198,8 +214,7 @@ All permissions a Casting Assistant has and…
 Add or delete an actor from the database  
 Modify actors or movies  
 Executive Producer  
-All permissions a Casting Director has and…  
-Add or delete a movie from the database  
+ 
 Tests:  
 One test for success behavior of each endpoint  
 One test for error behavior of each endpoint  
@@ -207,33 +222,10 @@ At least two tests of RBAC for each role
 
 
 ### Testing
-To run the tests locally, you need to have PostgreSQL installed on your local machines already.
-To set up a test database, replace the following fields on the test_app.py file:
-```db_user =<your username>```
-To run the tests, run:
-dropdb CastingAgencyTest
-createdb CastingAgencyTest 
 
-```source ./setup.sh ```
+flask db migrate , have to change codes inside models.py. But if use 
 
-```python3 test_app.py ```
-
-To monitor the test database contents.
-psql CastingAgencyTest
-select * from "Movie";
-select * from "Actor";
-
-https://casting-agency-program.herokuapp.com/
-set git remote heroku to https://git.heroku.com/casting-agency-program.git
-
-
-
-flask db migrate , have to change codes inside models.py. But if use manage.py. it is independent.
-
-python manage.py db init
-python manage.py db migrate
-python manage.py db upgrade
-
-heroku3 instead of heroku
+### Notes:
+To avoid the error from version confliction with heroku and dateutil, I installed heroku3 instead of heroku.
 
 
