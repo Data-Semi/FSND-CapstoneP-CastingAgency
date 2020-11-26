@@ -11,15 +11,15 @@ The Casting Agency models could be used for creating movies and managing and ass
 
 ## Getting Started
 ### Pre-requisites and Local Development
-You should already have Python3, pip on your local machines  
+You should already have Python3, pip3 on your local machines  
 To create a virtual environment on Windows, run:  
-```python -m venv venv```  
+```python3 -m venv venv```  
 To activate the virtual environment, run:  
 ```source venv/Scripts/activate```  
 ## About the Stack  
 ### Backend  
 To set up all the dependencies, run:  
-```pip install requirements.txt```  
+```pip3 install -r requirements.txt```  
 To run the application on your local machine, run:  
 ```FLASK_APP=app.py```    
 ```FLASK_ENV=development```    
@@ -37,7 +37,7 @@ To run the tests locally, you need to have PostgreSQL installed on your local ma
 To set up a test database, replace the following fields on the test_app.py file:  
 ```db_user =<your username>```  
 To run the tests, run:   
-```python test_app.py ```  
+```python3 test_app.py ```  
 Alternertively, to prepare the test, run:  
 ```dropdb CastingAgencyTest```  
 ```createdb CastingAgencyTest```   
@@ -51,9 +51,9 @@ To monitor the changes of test database contents, run:
 ```select * from "Actor";```  
 
 For DB migration, I decided to use manage.py file. This will avoid modify models.py file for delete db.create_all() line. All commends I need to use are:  
-```python manage.py db init```  
-```python manage.py db migrate```  
-```python manage.py db upgrade```  
+```python3 manage.py db init```  
+```python3 manage.py db migrate```  
+```python3 manage.py db upgrade```  
 
 ## API Reference  
 ### Getting Started  

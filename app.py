@@ -1,10 +1,16 @@
 import os
-from flask import Flask, request, abort, jsonify
+# from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from models import setup_db, Movie, Actor
 from datetime import date
 from auth import AuthError, requires_auth
+from flask import (
+    Flask,
+    request,
+    jsonify,
+    abort
+)
 
 
 def create_app(test_config=None):
@@ -12,6 +18,19 @@ def create_app(test_config=None):
     app = Flask(__name__)
     CORS(app)
     setup_db(app)
+
+    @app.after_request
+    def after_request(response):
+        # Set up CORS. Allow '*' for origins.
+        # Set this app as a public site in the first time. 
+        # response.headers.add('Access-Control-Allow-Origin',
+        # 'http://localhost:3000')
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers',
+                             'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods',
+                             'GET,PATCH,POST,DELETE')
+        return response
 
     @app.route('/')
     def index():
@@ -106,7 +125,7 @@ def create_app(test_config=None):
                 'success': True,
                 'new actor added': actor_data
                 })
-        except:
+        except Exception:
             abort(422)
 
     @app.route('/movies', methods=['POST'])
@@ -125,7 +144,7 @@ def create_app(test_config=None):
                 'success': True,
                 'new movie added': movie_data
                 })
-        except:
+        except Exception:
             abort(422)
 
     @app.route('/actors/<int:id>', methods=['PATCH'])
@@ -209,6 +228,7 @@ def create_app(test_config=None):
             "message": errors.error['description']
             }), errors.status_code
     return app
+
 
 app = create_app()
 
