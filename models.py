@@ -22,21 +22,6 @@ def setup_db(app, database_path=database_path):
     # delete line db.create_all() avobe.
 
 
-class Movies(db_updating_methods):
-    __tablename__ = 'movies'
-
-    title = db.Column(db.String)
-    release_date = db.Column(db.Date)
-
-
-class Actors(db_updating_methods):
-    __tablename__ = 'actors'
-
-    name = db.Column(db.String)
-    age = db.Column(db.Integer)
-    gender = db.Column(db.String)
-
-
 class db_updating_methods(db.Model):
     __abstract__ = True
 
@@ -52,3 +37,18 @@ class db_updating_methods(db.Model):
 
     def update(self):
         db.session.commit()
+
+
+class Movies(db_updating_methods):
+    __tablename__ = 'movies'
+
+    title = db.Column(db.String)
+    release_date = db.Column(db.Date)
+
+
+class Actors(db_updating_methods):
+    __tablename__ = 'actors'
+
+    name = db.Column(db.String)
+    age = db.Column(db.Integer)
+    gender = db.Column(db.String)
