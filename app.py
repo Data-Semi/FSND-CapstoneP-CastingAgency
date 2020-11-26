@@ -16,7 +16,8 @@ from flask import (
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__)
-    CORS(app)
+    cors = CORS(app)
+    # CORS(app, resources={"r*/api/*": {"origins": "*"}},send_wildcard=True)
     setup_db(app)
 
     @app.after_request
