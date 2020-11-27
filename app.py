@@ -20,19 +20,6 @@ def create_app(test_config=None):
     # CORS(app, resources={"r*/api/*": {"origins": "*"}},send_wildcard=True)
     setup_db(app)
 
-    @app.after_request
-    def after_request(response):
-        # Set up CORS. Allow '*' for origins.
-        # Set this app as a public site in the first time. 
-        # response.headers.add('Access-Control-Allow-Origin',
-        # 'http://localhost:3000')
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        # response.headers.add('Access-Control-Allow-Headers',
-        #                      'Content-Type,Authorization')
-        # response.headers.add('Access-Control-Allow-Methods',
-        #                      'GET,PATCH,POST,DELETE')
-        return response
-
     @app.route('/')
     def index():
         return ("Hello! Enjoy your casting agency app.")
