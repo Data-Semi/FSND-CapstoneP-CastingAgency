@@ -1,5 +1,4 @@
 __pycache__/
 venv/
 migrations/__pycache__/
-setup.sh
-debug_resources/Debug-memo.rm
+setup_backup.sh

@@ -21,8 +21,8 @@ To activate the virtual environment, run:
 To set up all the dependencies, run:  
 ```pip3 install -r requirements.txt```  
 To run the application on your local machine, run:  
-```FLASK_APP=app.py```    
-```FLASK_ENV=development```    
+```export FLASK_APP=app.py```    
+```export FLASK_ENV=development```    
 ```flask run```    
 The PostgreSQL database is hosted on Heroku. If you want to run locally using your local databse, you can modify the following fields in the models.py file:  
 ```database_name =<your_database_name>, database_path = <your_database_path>```  
@@ -43,17 +43,30 @@ Alternertively, to prepare the test, run:
 ```createdb CastingAgencyTest```   
 ```psql -U postgres casting_agency_test < ./debug_resources/casting_db_init_data.psql```  
 ```source ./setup.sh ```  
+Before using setup.sh, you need modify it with tokens and domain name etc. 
 
 
 To monitor the changes of test database contents, run:  
 ```psql CastingAgencyTest```  
-```select * from "Movie";```  
-```select * from "Actor";```  
+```select * from "Movies";```  
+```select * from "Actors";```  
 
 For DB migration, I decided to use manage.py file. This will avoid modify models.py file for delete db.create_all() line. All commends I need to use are:  
 ```python3 manage.py db init```  
 ```python3 manage.py db migrate```  
 ```python3 manage.py db upgrade```  
+
+Test your endpoints with [Postman](https://getpostman.com).  
+    - Register 3 users in Auth0 with 3 roles.  
+        - Casting Assistant: Can view actors and movies  
+        - Casting Director: Can view actors and movies, add or delete an actor from the database, and modify actors or movies  
+        - Producer: Have all permissions a Casting Director has and add or delete a movie from the database  
+    - Sign into each account and make note of the JWT.  
+        https://fsnd-casting-agency-project.us.auth0.com/authorize?audience=http://localhost:5000&response_type=token&client_id=T6etg4HnxeJ7dvojJkQG6n52o3WPyUV6&redirect_uri=https://127.0.0.1:5000/
+        Note:Need to enable Implicit. Auto0: Applications-->Advanced Settings-->Grant Types-->Implicit  
+    - Import the postman collection which you can found in debug_resources/CastingAgency.postman_collection.json
+    - Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs).
+    - Run the collection and correct any errors.
 
 ## API Reference  
 ### Getting Started  
@@ -195,6 +208,6 @@ I would like to thank Udacity mentors help me to solve many learning blockers: s
 
 ### Notes:  
 To avoid the error from version confliction with heroku and dateutil, I installed heroku3 instead of heroku.  
-For prepare further debug, I add postman collection and Debug-memo.rm and migrations folder.  
+For prepare further debug, I add Postman collection file and Debug-memo.rm and migrations folder.  
 
 
